@@ -11,7 +11,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class BrowserStack {
 
-    public static void main(String args[]) throws MalformedURLException {
+    public static void main(String[] args) throws MalformedURLException {
         ChromeOptions options = new ChromeOptions();
 
         String username = System.getenv("BROWSERSTACK_USERNAME");
@@ -23,6 +23,9 @@ public class BrowserStack {
         if (accessKey == null) {
             accessKey = "BROWSERSTACK_ACCESS_KEY";
         }
+
+        System.getProperties().put("http.proxyHost", "127.0.0.1");
+        System.getProperties().put("http.proxyPort", "5999");
 
         WebDriver driver = new RemoteWebDriver(
                 new URL("http://" + username + ":" + accessKey + "@hub.browserstack.com/wd/hub"), options);
